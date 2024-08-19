@@ -2,5 +2,6 @@
 
 public class ApplicationDbContext
 {
-    
+    //Config database connection
+    //Declare tables
 }

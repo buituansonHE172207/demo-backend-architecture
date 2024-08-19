@@ -1,6 +1,6 @@
 ﻿namespace DemoBackendArchitecture.Infrastructure.Repositories;
 
-public class ProductRepository
+public class ProductRepository : IProductRepository
 {
-    
+    //inherite Interface of domain layer
 }
