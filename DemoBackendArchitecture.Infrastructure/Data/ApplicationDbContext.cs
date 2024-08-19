@@ -3,15 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DemoBackendArchitecture.Infrastructure.Data;
 
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {
     //Config database connection
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-    { }
-    
+
     //Declare tables
-    public DbSet<User> Users { get; set; }
-    public DbSet<Product> Products { get; set; }
+    public DbSet<User> Users { get; init; }
+    public DbSet<Product> Products { get; init; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
