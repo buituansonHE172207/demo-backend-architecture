@@ -5,12 +5,17 @@ using DemoBackendArchitecture.Application.Services;
 using DemoBackendArchitecture.Domain.Interfaces;
 using DemoBackendArchitecture.Infrastructure.Data;
 using DemoBackendArchitecture.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 //Add DBContext with EF Core
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 //Register services for Application layer
 builder.Services.AddScoped<IProductService, ProductService>();
@@ -40,4 +45,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-await app.RunAsync();
+app.Run();
