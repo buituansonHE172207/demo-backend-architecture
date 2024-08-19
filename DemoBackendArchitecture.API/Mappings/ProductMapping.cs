@@ -1,6 +1,13 @@
-﻿namespace DemoBackendArchitecture.Mappings;
+﻿using AutoMapper;
+using DemoBackendArchitecture.API.Models;
+using DemoBackendArchitecture.Application.DTOs;
 
-public class ProductMapping
+namespace DemoBackendArchitecture.API.Mappings;
+
+public class ProductMapping : Profile
 {
-    
+    public ProductMapping()
+    {
+        CreateMap<CreateProductRequest, ProductDto>().ReverseMap();
+    }
 }
