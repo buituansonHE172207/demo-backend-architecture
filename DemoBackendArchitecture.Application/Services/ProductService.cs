@@ -5,15 +5,8 @@ using DemoBackendArchitecture.Domain.Interfaces;
 
 namespace DemoBackendArchitecture.Application.Services;
 
-public class ProductService : IProductService
+public class ProductService(IProductRepository productRepository) : IProductService
 {
-    private readonly IProductRepository _productRepository;
-
-    public ProductService(IProductRepository productRepository)
-    {
-        _productRepository = productRepository;
-    }
-
     public void CreateProduct(ProductDto productDto)
     {
         var product = new Product
@@ -27,12 +20,12 @@ public class ProductService : IProductService
             CreatedAt = productDto.CreatedAt,
             UpdatedAt = productDto.UpdatedAt
         };
-        _productRepository.Add(product);
+        productRepository.Add(product);
     }
 
     public ProductDto? GetProductById(int id)
     {
-        var product = _productRepository.GetById(id);
+        var product = productRepository.GetById(id);
         if(product == null)
         {
             return null;

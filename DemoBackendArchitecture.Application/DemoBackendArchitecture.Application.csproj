@@ -7,10 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DemoBackendArchitecture.Domain\DemoBackendArchitecture.Domain.csproj" />
+      <PackageReference Include="AutoMapper" Version="13.0.1" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="AutoMapper" Version="13.0.1" />
+      <ProjectReference Include="..\DemoBackendArchitecture.Domain\DemoBackendArchitecture.Domain.csproj" />
     </ItemGroup>
 </Project>
