@@ -43,4 +43,13 @@ public class ProductController(IProductService productService, IMapper mapper) :
         productService.UpdateProduct(id, productDto);
         return Ok("Product updated successfully");
     }
+    
+    [HttpDelete("{id:int}")]
+    [ProducesResponseType<string>(StatusCodes.Status200OK)]
+    public IActionResult DeleteProduct(int id)
+    {
+        //Calling the DeleteProduct method of the productService
+        productService.DeleteProduct(id);
+        return Ok("Product deleted successfully");
+    }
 }

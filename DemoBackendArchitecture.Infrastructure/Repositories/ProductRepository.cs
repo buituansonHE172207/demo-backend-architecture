@@ -26,4 +26,11 @@ public class ProductRepository(ApplicationDbContext context) : IProductRepositor
         context.Products.Update(product);
         context.SaveChanges();
     }
+
+    public void Delete(Product product)
+    {
+        //Implement Delete method
+        context.Products.Remove(product);
+        context.SaveChanges();
+    }
 }

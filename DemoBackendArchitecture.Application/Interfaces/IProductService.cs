@@ -7,4 +7,5 @@ public interface IProductService
     void CreateProduct(ProductDto productDto);
     ProductDto? GetProductById(int id);
     void UpdateProduct(int id, ProductDto productDto);
+    void DeleteProduct(int id);
 }

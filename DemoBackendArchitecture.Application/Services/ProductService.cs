@@ -43,4 +43,17 @@ public class ProductService(IProductRepository productRepository, IMapper mapper
         //Calling the Update method of the productRepository
         productRepository.Update(product);
 }
+
+    public void DeleteProduct(int id)
+    {
+        //Calling the GetById method of the productRepository
+        var product = productRepository.GetById(id);
+        //Returning if the product is null
+        if(product == null)
+        {
+            return;
+        }
+        //Calling the Delete method of the productRepository
+        productRepository.Delete(product);
+    }
 }
