@@ -4,25 +4,18 @@ using DemoBackendArchitecture.Infrastructure.Data;
 
 namespace DemoBackendArchitecture.Infrastructure.Repositories;
 
-public class ProductRepository : IProductRepository
+public class ProductRepository(ApplicationDbContext context) : IProductRepository
 {
-    private readonly ApplicationDbContext _context;
-
-    public ProductRepository(ApplicationDbContext context)
-    {
-        _context = context;
-    }
-    
     //inherit Interface of domain layer
     public void Add(Product product)
     {
         //Implement Add method
-        _context.Add(product);
-        _context.SaveChanges();
+        context.Add(product);
+        context.SaveChanges();
     }
     
     public Product? GetById(int id)
     {
-        return _context.Products.Find(id);
+        return context.Products.Find(id);
     }
 }
