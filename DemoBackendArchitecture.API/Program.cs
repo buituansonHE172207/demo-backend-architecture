@@ -1,13 +1,16 @@
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json.Serialization;
 using DemoBackendArchitecture.API.Mappings;
 using DemoBackendArchitecture.Application.Interfaces;
 using DemoBackendArchitecture.Application.Mappings;
 using DemoBackendArchitecture.Application.Services;
+using DemoBackendArchitecture.Domain.Entities;
 using DemoBackendArchitecture.Domain.Interfaces;
 using DemoBackendArchitecture.Infrastructure.Data;
 using DemoBackendArchitecture.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -19,12 +22,23 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Register services for Application layer
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRoleService, RoleService>();
 // Register services for Infrastructure layer
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+// Register PasswordHasher
+builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 // Configure Automapper
 builder.Services.AddAutoMapper(typeof(ProductMappingProfile).Assembly, typeof(ProductMapping).Assembly);
+builder.Services.AddAutoMapper(typeof(UserMappingProfile).Assembly, typeof(UserMapping).Assembly);
 // Configure controllers and other services
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+    });
 //Configure JwtBearer
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -41,11 +55,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 // Configure Authorization
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("Admin", policy => policy.RequireClaim(ClaimTypes.Role, "Admin"));
-    options.AddPolicy("User", policy => policy.RequireClaim(ClaimTypes.Role, "User"));
-});
+builder.Services.AddAuthorizationBuilder()
+    // Configure Authorization
+    .AddPolicy("Admin", policy => policy.RequireClaim(ClaimTypes.Role, "Admin"))
+    .AddPolicy("User", policy => policy.RequireClaim(ClaimTypes.Role, "User"));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

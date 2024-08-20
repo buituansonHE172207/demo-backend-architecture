@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DemoBackendArchitecture.API.Controllers;
 
-[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class ProductController(IProductService productService, IMapper mapper) : ControllerBase
