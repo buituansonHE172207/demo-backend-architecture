@@ -1,6 +1,6 @@
 ﻿namespace DemoBackendArchitecture.API.Models;
 
-public class UpdateProductRequest
+public abstract class UpdateProductRequest
 {
     public int Id { get; set; }
     public string? Name { get; set; }

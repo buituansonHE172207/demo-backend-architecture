@@ -1,6 +1,6 @@
 ﻿namespace DemoBackendArchitecture.API.Models;
 
-public class CreateProductRequest
+public abstract class CreateProductRequest
 {
     public string? Name { get; set; }
     public decimal Price { get; set; }

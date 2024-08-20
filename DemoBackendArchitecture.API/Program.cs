@@ -10,20 +10,16 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-//Add DBContext with EF Core
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-//Register services for Application layer
+// Register services for Application layer
 builder.Services.AddScoped<IProductService, ProductService>();
-//Register services for Infrastructure layer
+// Register services for Infrastructure layer
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-//Configure Automapper
+// Configure Automapper
 builder.Services.AddAutoMapper(typeof(ProductMappingProfile).Assembly, typeof(ProductMapping).Assembly);
-//Configure controllers and other services
+// Configure controllers and other services
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -45,4 +41,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+await app.RunAsync();
