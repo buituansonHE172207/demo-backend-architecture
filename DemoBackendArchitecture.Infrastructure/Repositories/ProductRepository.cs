@@ -16,6 +16,14 @@ public class ProductRepository(ApplicationDbContext context) : IProductRepositor
     
     public Product? GetById(int id)
     {
+        //Implement GetById method
         return context.Products.Find(id);
+    }
+
+    public void Update(Product product)
+    {
+        //Implement Update method
+        context.Products.Update(product);
+        context.SaveChanges();
     }
 }
