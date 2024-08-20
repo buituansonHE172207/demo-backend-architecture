@@ -13,5 +13,6 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.Name).IsRequired().HasMaxLength(50);
         builder.Property(u => u.Email).IsRequired().HasMaxLength(50);
         builder.Property(u => u.Password).IsRequired().HasMaxLength(50);
+        builder.HasOne<Role>().WithMany().HasForeignKey(u => u.RoleId);
     }
 }
