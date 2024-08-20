@@ -1,4 +1,4 @@
-﻿namespace DemoBackendArchitecture.API.Configurations;
+﻿namespace DemoBackendArchitecture.API.Configs;
 
 public static class ApplicationBuilderExtensions
 {
