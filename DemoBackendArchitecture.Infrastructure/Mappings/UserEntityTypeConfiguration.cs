@@ -13,6 +13,13 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
         builder.Property(u => u.Name).IsRequired().HasMaxLength(50);
         builder.Property(u => u.Email).IsRequired().HasMaxLength(50);
         builder.Property(u => u.Password).IsRequired().HasMaxLength(50);
-        builder.HasOne<Role>().WithMany().HasForeignKey(u => u.RoleId);
+        // Define the relationship between the User and Role entities
+        builder.HasOne(u => u.Role)
+            .WithMany(r => r.Users)
+            .HasForeignKey(u => u.RoleId);
+        // Mapped foreign key RoleId to the Role entity
+        builder.HasIndex(u => u.RoleId);
+        // Mapped the User entity to the Users table
+        builder.ToTable("Users");
     }
 }

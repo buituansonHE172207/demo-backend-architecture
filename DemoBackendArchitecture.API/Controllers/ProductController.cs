@@ -2,10 +2,12 @@
 using DemoBackendArchitecture.API.Models;
 using DemoBackendArchitecture.Application.DTOs;
 using DemoBackendArchitecture.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoBackendArchitecture.API.Controllers;
 
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class ProductController(IProductService productService, IMapper mapper) : ControllerBase

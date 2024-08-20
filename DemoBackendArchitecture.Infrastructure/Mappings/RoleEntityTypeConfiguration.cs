@@ -11,6 +11,12 @@ public class RoleEntityTypeConfiguration : IEntityTypeConfiguration<Role>
         builder.HasKey(r => r.Id);
         builder.Property(r => r.Id).ValueGeneratedOnAdd();
         builder.Property(r => r.RoleName).IsRequired().HasMaxLength(50);
-        builder.HasMany<User>().WithOne().HasForeignKey(u => u.RoleId);
+        
+        // Define the relationship between the Role and User entities
+        builder.HasMany(r => r.Users)
+            .WithOne(u => u.Role)
+            .HasForeignKey(u => u.RoleId);
+        // Mapped the Role entity to the Roles table
+        builder.ToTable("Roles");
     }
 }
