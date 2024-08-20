@@ -2,7 +2,7 @@
 
 public class Price
 {
-    public decimal Value { get; }
+    private decimal Value { get; }
 
     public Price(decimal value)
     {
