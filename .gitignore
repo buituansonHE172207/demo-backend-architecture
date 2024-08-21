@@ -367,3 +367,5 @@ FodyWeavers.xsd
 
 #ASP.NET
 appsettings.json
+DemoBackendArchitecture.API/appsettings.json
+/DemoBackendArchitecture.Infrastructure/Migrations
