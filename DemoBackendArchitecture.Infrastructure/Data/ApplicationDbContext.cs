@@ -8,6 +8,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<User> Users { get; init; } = null!;
     public DbSet<Role> Roles { get; init; } = null!;
     public DbSet<Product> Products { get; init; } = null!;
+    public DbSet<RefreshToken> RefreshTokens { get; init; } = null!;
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

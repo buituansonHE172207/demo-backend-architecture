@@ -19,6 +19,10 @@ public class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
             .HasForeignKey(u => u.RoleId);
         // Mapped foreign key RoleId to the Role entity
         builder.HasIndex(u => u.RoleId);
+        // Define the relationship between the User and RefreshToken entities
+        builder.HasMany(u => u.RefreshTokens)
+            .WithOne(rt => rt.User)
+            .HasForeignKey(rt => rt.UserId);
         // Mapped the User entity to the Users table
         builder.ToTable("Users");
     }

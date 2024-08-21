@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace DemoBackendArchitecture.Domain.Entities;
+﻿namespace DemoBackendArchitecture.Domain.Entities;
 
 public class User
 {
@@ -10,4 +8,6 @@ public class User
     public string? Password { get; set; }
     public int RoleId { get; set; }
     public Role? Role { get; set; }
+    
+    public ICollection<RefreshToken>? RefreshTokens { get; set; } = new HashSet<RefreshToken>();
 }
