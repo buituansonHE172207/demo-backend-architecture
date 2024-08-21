@@ -369,3 +369,4 @@ FodyWeavers.xsd
 appsettings.json
 DemoBackendArchitecture.API/appsettings.json
 /DemoBackendArchitecture.Infrastructure/Migrations
+.idea/.idea.DemoBackendArchitecture/.idea/sqldialects.xml
