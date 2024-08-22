@@ -13,8 +13,8 @@ public class ProductEntityTypeConfiguration :IEntityTypeConfiguration<Product>
         builder.HasKey(p => p.Id);
         builder.Property(p => p.Id).ValueGeneratedOnAdd();
         builder.Property(p => p.Name).IsRequired().HasMaxLength(50);
-        builder.Property(p => p.Description).IsRequired().HasMaxLength(50);
-        builder.Property(p => p.ImageUrl).IsRequired().HasMaxLength(500);
+        builder.Property(p => p.Description);
+        builder.Property(p => p.ImageUrl).IsRequired();
         builder.Property(p => p.Stock).IsRequired();
         builder.Property(p => p.Price).IsRequired();
         //Configure Price to have a precision of 10 and a scale of 2
