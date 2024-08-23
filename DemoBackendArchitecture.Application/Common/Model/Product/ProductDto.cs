@@ -1,4 +1,4 @@
-﻿namespace DemoBackendArchitecture.Application.DTOs;
+﻿namespace DemoBackendArchitecture.Application.Common.Model.Product;
 
 public class ProductDto
 {

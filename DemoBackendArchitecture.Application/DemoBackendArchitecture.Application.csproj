@@ -9,6 +9,7 @@
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="13.0.1" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
+      <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
       <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
       <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="8.0.0" />
       <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.0.0" />
@@ -16,9 +17,5 @@
 
     <ItemGroup>
       <ProjectReference Include="..\DemoBackendArchitecture.Domain\DemoBackendArchitecture.Domain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Mappings\" />
     </ItemGroup>
 </Project>

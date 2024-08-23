@@ -1,8 +1,10 @@
 ﻿using System.Security.Claims;
 using System.Text;
 using System.Text.Json.Serialization;
-using DemoBackendArchitecture.Application.Interfaces;
-using DemoBackendArchitecture.Application.Mappings;
+using DemoBackendArchitecture.Application.Common.Interfaces;
+using DemoBackendArchitecture.Application.Common.Model.Product;
+using DemoBackendArchitecture.Application.Common.Model.User;
+using DemoBackendArchitecture.Application.Common.Utilities;
 using DemoBackendArchitecture.Application.Services;
 using DemoBackendArchitecture.Domain.Entities;
 using DemoBackendArchitecture.Domain.Interfaces;
@@ -28,13 +30,16 @@ public static class ServiceExtensions
     {
 
         // Register services for Application layer
-        services.AddScoped<IProductService, ProductService>();
-        services.AddScoped<IUserService, UserService>();
-        services.AddScoped<IRoleService, RoleService>();
+        services.AddScoped<IAuthService, AuthService>();
         // Register services for Infrastructure layer
         services.AddScoped<IProductRepository, ProductRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IRoleRepository, RoleRepository>();
+        
+        // Register services for Web layer
+        services.AddSingleton<ICookieService, CookieService>();
+        services.AddSingleton<ITokenService, TokenService>();
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
     }
 
     public static void ConfigurePasswordHasher(this IServiceCollection services, IConfiguration configuration)
@@ -46,6 +51,9 @@ public static class ServiceExtensions
     public static void ConfigureAutoMapper(this IServiceCollection services, IConfiguration configuration)
     {
         // Configure Automapper
+        services.AddAutoMapper(typeof(Product).Assembly, typeof(ProductDto).Assembly);
+        services.AddAutoMapper(typeof(User).Assembly, typeof(UserSignInRequest).Assembly);
+        services.AddAutoMapper(typeof(User).Assembly, typeof(UserSignInResponse).Assembly);
     }
 
     public static void ConfigureJwtBearer(this IServiceCollection services, IConfiguration configuration)
@@ -82,7 +90,8 @@ public static class ServiceExtensions
         // Configure controllers and other services
         services.AddControllers()
             .AddJsonOptions(options => { options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve; });
-        
+        // Add HttpContextAccessor
+        services.AddHttpContextAccessor();
         // Add Swagger
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
