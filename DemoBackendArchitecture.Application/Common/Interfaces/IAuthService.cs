@@ -5,4 +5,5 @@ namespace DemoBackendArchitecture.Application.Common.Interfaces;
 public interface IAuthService
 {
     Task<UserSignInResponse> SignIn(UserSignInRequest request);
+    Task<UserSignUpResponse> SignUp(UserSignUpRequest request, CancellationToken token);
 }

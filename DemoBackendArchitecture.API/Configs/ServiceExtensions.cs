@@ -54,6 +54,8 @@ public static class ServiceExtensions
         services.AddAutoMapper(typeof(Product).Assembly, typeof(ProductDto).Assembly);
         services.AddAutoMapper(typeof(User).Assembly, typeof(UserSignInRequest).Assembly);
         services.AddAutoMapper(typeof(User).Assembly, typeof(UserSignInResponse).Assembly);
+        services.AddAutoMapper(typeof(User).Assembly, typeof(UserSignUpRequest).Assembly);
+        services.AddAutoMapper(typeof(User).Assembly, typeof(UserSignUpResponse).Assembly);
     }
 
     public static void ConfigureJwtBearer(this IServiceCollection services, IConfiguration configuration)

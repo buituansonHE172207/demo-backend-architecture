@@ -10,7 +10,7 @@ public class GenericRepository<T>(ApplicationDbContext context) : IGenericReposi
     private readonly DbSet<T> _dbSet = context.Set<T>();
     private readonly ApplicationDbContext _context = context;
 
-    public async Task AddAsync(T entity) => await _dbSet.AddAsync(entity);
+    public async Task AddAsync(T entity, CancellationToken token) => await _dbSet.AddAsync(entity, token);
 
     public async Task AddRangeAsync(IEnumerable<T> entities) => await _dbSet.AddRangeAsync(entities);
 
@@ -51,7 +51,7 @@ public class GenericRepository<T>(ApplicationDbContext context) : IGenericReposi
 
     public int SaveChange() => _context.SaveChanges();
 
-    public async Task SaveChangeAsync() => await _context.SaveChangesAsync();
+    public async Task SaveChangeAsync(CancellationToken token) => await _context.SaveChangesAsync(token);
 
     #endregion
     

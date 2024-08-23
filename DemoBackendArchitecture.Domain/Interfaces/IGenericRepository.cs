@@ -4,7 +4,7 @@ namespace DemoBackendArchitecture.Domain.Interfaces;
 
 public interface IGenericRepository<T> where T : class
 {
-    public Task AddAsync(T entity);
+    public Task AddAsync(T entity, CancellationToken token);
     public Task AddRangeAsync(IEnumerable<T> entities);
     public Task<bool> AnyAsync(Expression<Func<T, bool>> filter);
     public Task<bool> AnyAsync();
@@ -18,6 +18,6 @@ public interface IGenericRepository<T> where T : class
     public void DeleteRange(IEnumerable<T> entities);
     public Task Delete(object id);
     public int SaveChange();
-    public Task SaveChangeAsync();
+    public Task SaveChangeAsync(CancellationToken token);
     
 }

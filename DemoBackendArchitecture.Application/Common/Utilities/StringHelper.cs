@@ -5,11 +5,15 @@ namespace DemoBackendArchitecture.Application.Common.Utilities;
 
 public static class StringHelper
 {
-
+    public static string Hash(this string inputString)
+    {
+        PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+        return passwordHasher.HashPassword(null!, inputString);
+    }
     public static bool Verify(User user, string pass)
     {
-        PasswordHasher<User> _passwordHasher = new PasswordHasher<User>();
-         return _passwordHasher.VerifyHashedPassword(user, user.Password!, pass) == PasswordVerificationResult.Success;
+        PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+         return passwordHasher.VerifyHashedPassword(user, user.Password!, pass) == PasswordVerificationResult.Success;
     }
         
 }

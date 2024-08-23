@@ -4,6 +4,7 @@ using DemoBackendArchitecture.Application.Common.Interfaces;
 using DemoBackendArchitecture.Application.Common.Model.User;
 using DemoBackendArchitecture.Application.Common.Utilities;
 using DemoBackendArchitecture.Domain.Constants;
+using DemoBackendArchitecture.Domain.Entities;
 using DemoBackendArchitecture.Domain.Interfaces;
 
 namespace DemoBackendArchitecture.Application.Services;
@@ -34,6 +35,31 @@ public class AuthService(IUserRepository userRepository, ITokenService tokenServ
         //set token to response
         response.Token = token;
         //set user role to response
+        response.Role = user.Role.RoleName;
+        //return response
+        return response;
+    }
+
+    public async Task<UserSignUpResponse> SignUp(UserSignUpRequest request, CancellationToken token)
+    {
+        //check if email exist
+        var isEmailExist = await _userRepository.AnyAsync(x => x.Email == request.Email);
+        if (isEmailExist)
+            throw UserException.UserAlreadyExistsException(request.Email);
+        
+        //map request to user
+        var user = _mapper.Map<User>(request);
+        //hash password
+        user.Password = user.Password.Hash();
+        //set user role
+        user.Role = new Role { RoleName = RoleConstants.Admin };
+        //add user to database
+        await _userRepository.AddAsync(user, token);
+        //Save changes
+        await _userRepository.SaveChangeAsync(token);
+        //map user to response
+        var response = _mapper.Map<UserSignUpResponse>(user);
+        //Set user role to response
         response.Role = user.Role.RoleName;
         //return response
         return response;
