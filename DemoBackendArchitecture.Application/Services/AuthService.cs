@@ -13,7 +13,7 @@ public class AuthService(IUserRepository userRepository, ITokenService tokenServ
 {
     private readonly IUserRepository _userRepository = userRepository;
     private readonly ITokenService _tokenService = tokenService;
-    private readonly ICookieService _cookieService = cookieService;
+    private ICookieService _cookieService = cookieService;
     private readonly IMapper _mapper = mapper;
     public async Task<UserSignInResponse> SignIn(UserSignInRequest request)
     {
@@ -63,5 +63,17 @@ public class AuthService(IUserRepository userRepository, ITokenService tokenServ
         response.Role = user.Role.RoleName;
         //return response
         return response;
+    }
+
+    public void Logout()
+    {
+        try
+        {
+            //get token from cookie
+            _ = _cookieService.Get();
+            //delete token from cookie
+            _cookieService.Delete();
+        }
+        catch { }
     }
 }

@@ -6,4 +6,5 @@ public interface IAuthService
 {
     Task<UserSignInResponse> SignIn(UserSignInRequest request);
     Task<UserSignUpResponse> SignUp(UserSignUpRequest request, CancellationToken token);
+    void Logout();
 }

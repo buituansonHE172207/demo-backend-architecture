@@ -15,4 +15,11 @@ public class AuthController(IAuthService authService) : BaseController
     [HttpPost("sign-up")]
     public async Task<IActionResult> SignUp([FromBody] UserSignUpRequest request, CancellationToken token) 
         => Created("",await _authService.SignUp(request, token));
+    
+    [HttpDelete("logout")]
+    public IActionResult Logout()
+    {
+        _authService.Logout();
+        return Ok();
+    }
 }
