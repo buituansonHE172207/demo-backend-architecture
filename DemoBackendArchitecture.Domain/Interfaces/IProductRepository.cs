@@ -2,10 +2,6 @@
 
 namespace DemoBackendArchitecture.Domain.Interfaces;
 
-public interface IProductRepository
+public interface IProductRepository : IGenericRepository<Product>
 {
-    void Add(Product product);
-    Product? GetById(int id);
-    void Update(Product product);
-    void Delete(Product product);
 }

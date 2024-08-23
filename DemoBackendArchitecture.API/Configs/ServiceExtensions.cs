@@ -1,7 +1,6 @@
 ﻿using System.Security.Claims;
 using System.Text;
 using System.Text.Json.Serialization;
-using DemoBackendArchitecture.API.Mappings;
 using DemoBackendArchitecture.Application.Interfaces;
 using DemoBackendArchitecture.Application.Mappings;
 using DemoBackendArchitecture.Application.Services;
@@ -47,8 +46,6 @@ public static class ServiceExtensions
     public static void ConfigureAutoMapper(this IServiceCollection services, IConfiguration configuration)
     {
         // Configure Automapper
-        services.AddAutoMapper(typeof(ProductMappingProfile).Assembly, typeof(ProductMapping).Assembly);
-        services.AddAutoMapper(typeof(UserMappingProfile).Assembly, typeof(UserMapping).Assembly);
     }
 
     public static void ConfigureJwtBearer(this IServiceCollection services, IConfiguration configuration)

@@ -4,7 +4,6 @@ namespace DemoBackendArchitecture.Application.Interfaces
 {
     public interface IRoleService
     {
-        Role? GetRoleByName(string roleName);
     }
 };
 

@@ -2,7 +2,6 @@
 
 namespace DemoBackendArchitecture.Domain.Interfaces;
 
-public interface IRoleRepository
+public interface IRoleRepository : IGenericRepository<Role>
 {
-    Role? GetRoleByName(string roleName);
 }
