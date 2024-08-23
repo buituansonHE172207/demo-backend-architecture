@@ -17,4 +17,8 @@
     <ItemGroup>
       <ProjectReference Include="..\DemoBackendArchitecture.Domain\DemoBackendArchitecture.Domain.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Mappings\" />
+    </ItemGroup>
 </Project>
