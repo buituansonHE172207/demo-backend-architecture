@@ -22,4 +22,8 @@ public class AuthController(IAuthService authService) : BaseController
         _authService.Logout();
         return Ok();
     }
+    
+    [HttpGet("refresh")]
+    public async Task<IActionResult> RefreshToken() 
+        => Ok(await _authService.RefreshToken());
 }

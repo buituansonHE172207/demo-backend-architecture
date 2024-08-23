@@ -9,10 +9,16 @@ using DemoBackendArchitecture.Domain.Interfaces;
 
 namespace DemoBackendArchitecture.Application.Services;
 
-public class AuthService(IUserRepository userRepository, ITokenService tokenService, ICookieService cookieService, IMapper mapper) : IAuthService
+public class AuthService(
+    IUserRepository userRepository,
+    ITokenService tokenService,
+    ICurrentUserService currentUserService,
+    ICookieService cookieService,
+    IMapper mapper) : IAuthService
 {
     private readonly IUserRepository _userRepository = userRepository;
     private readonly ITokenService _tokenService = tokenService;
+    private readonly ICurrentUserService _currentUser = currentUserService;
     private ICookieService _cookieService = cookieService;
     private readonly IMapper _mapper = mapper;
     public async Task<UserSignInResponse> SignIn(UserSignInRequest request)
@@ -75,5 +81,17 @@ public class AuthService(IUserRepository userRepository, ITokenService tokenServ
             _cookieService.Delete();
         }
         catch { }
+    }
+
+    public async Task<string?> RefreshToken()
+    {
+        //get current user from cookie
+        var user = await _userRepository.GetUserByEmailAsync(_currentUser.GetCurrentUserEmail());
+        //generate token
+        var accessToken = _tokenService.GenerateToken(user);
+        //set token to cookie
+        _cookieService.Set(accessToken);
+        //return token
+        return accessToken;
     }
 }

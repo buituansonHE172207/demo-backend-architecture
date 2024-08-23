@@ -4,6 +4,7 @@ using System.Text;
 using DemoBackendArchitecture.Application.Common.Interfaces;
 using DemoBackendArchitecture.Domain.Entities;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace DemoBackendArchitecture.Application.Services;
@@ -35,5 +36,26 @@ public class TokenService(IConfiguration configuration) : ITokenService
         );
         // Return the token
         return new JwtSecurityTokenHandler().WriteToken(token);
+    }
+
+    public ClaimsPrincipal ValidateToken(string jwtCookie)
+    {
+        IdentityModelEventSource.ShowPII = true;
+        // Create the validation parameters
+        var validationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = _configuration["Jwt:Issuer"],
+            ValidAudience = _configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]))
+        };
+        
+        // Validate the token
+        var principal = new JwtSecurityTokenHandler().ValidateToken(jwtCookie, validationParameters, out _);
+        // Return the principal
+        return principal;
     }
 }
