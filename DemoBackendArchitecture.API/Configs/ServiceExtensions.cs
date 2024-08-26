@@ -40,6 +40,7 @@ public static class ServiceExtensions
         services.AddSingleton<ICookieService, CookieService>();
         services.AddSingleton<ITokenService, TokenService>();
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+        services.AddSingleton<ICurrentUserService, CurrentUserService>();
     }
 
     public static void ConfigurePasswordHasher(this IServiceCollection services, IConfiguration configuration)

@@ -6,5 +6,9 @@ namespace DemoBackendArchitecture.API.Controllers;
 [Route("api/[controller]")]
 public class BaseController : ControllerBase
 {
-    
+    [HttpGet]
+    public IActionResult Test()
+    {
+        return Ok("API is working!");
+    }
 }

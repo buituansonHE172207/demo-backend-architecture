@@ -363,7 +363,7 @@ MigrationBackup/
 FodyWeavers.xsd
 
 #Jetbrain
-.idea
+.idea/
 
 #ASP.NET
 appsettings.json
