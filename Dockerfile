@@ -24,5 +24,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/out .
 
+EXPOSE 8080
+USER app
+
 # Set the entrypoint for the container
 ENTRYPOINT ["dotnet", "DemoBackendArchitecture.API.dll"]
