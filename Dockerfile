@@ -1,6 +1,11 @@
-# Use the official .NET SDK image to build the application
+# Stage 1: Build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /app
+
+# Set environment variables
+ENV DOCKER_WORKDIR="/app"
+ENV DOTNET_ENV="Release"
+
+WORKDIR ${DOCKER_WORKDIR}
 
 # Copy the dependencies file to the working directory 
 COPY ./DemoBackendArchitecture.Application/*.csproj ./DemoBackendArchitecture.Application/
@@ -17,15 +22,24 @@ RUN dotnet restore ./DemoBackendArchitecture.API/DemoBackendArchitecture.API.csp
 
 # Copy everything else and build
 COPY . ./
-RUN dotnet publish ./DemoBackendArchitecture.API/DemoBackendArchitecture.API.csproj -c Release -o out
+RUN dotnet publish ./DemoBackendArchitecture.API/DemoBackendArchitecture.API.csproj -c ${DOTNET_ENV} -o out
 
-# Use the official .NET runtime image for the final stage
+# Stage 2: Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
-WORKDIR /app
-COPY --from=build /app/out .
+
+# Set environment variables
+ENV DOCKER_WORKDIR="/app"
+
+WORKDIR ${DOCKER_WORKDIR}
+
+# Create non-root user
+RUN addgroup --system appgroup && adduser --system appuser --ingroup appgroup
+USER appuser
+
+# Copy the built application from the build stage
+COPY --from=build ${DOCKER_WORKDIR}/out .
 
 EXPOSE 8080
-USER app
 
 # Set the entrypoint for the container
 ENTRYPOINT ["dotnet", "DemoBackendArchitecture.API.dll"]
