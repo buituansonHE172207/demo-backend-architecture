@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBackendArchitecture.API", "DemoBackendArchitecture.API\DemoBackendArchitecture.API.csproj", "{4858764D-BB57-4B14-B7B0-BC0DD948BD6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBackendArchitecture.API", "DemoBackendArchitecture.API\DemoBackendArchitecture.API.csproj", "{4858764D-BB57-4B14-B7B0-BC0DD948BD6D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBackendArchitecture.Domain", "DemoBackendArchitecture.Domain\DemoBackendArchitecture.Domain.csproj", "{EEF53315-9EE3-465E-9763-6A9A16F51D19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBackendArchitecture.Domain", "DemoBackendArchitecture.Domain\DemoBackendArchitecture.Domain.csproj", "{EEF53315-9EE3-465E-9763-6A9A16F51D19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBackendArchitecture.Infrastructure", "DemoBackendArchitecture.Infrastructure\DemoBackendArchitecture.Infrastructure.csproj", "{6CD2A362-28EF-4CB9-BBF2-BD9DF6FB0DCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBackendArchitecture.Infrastructure", "DemoBackendArchitecture.Infrastructure\DemoBackendArchitecture.Infrastructure.csproj", "{6CD2A362-28EF-4CB9-BBF2-BD9DF6FB0DCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBackendArchitecture.Application", "DemoBackendArchitecture.Application\DemoBackendArchitecture.Application.csproj", "{1D88E1AC-1189-41B7-8989-A7FC40272C5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DemoBackendArchitecture.Application", "DemoBackendArchitecture.Application\DemoBackendArchitecture.Application.csproj", "{1D88E1AC-1189-41B7-8989-A7FC40272C5E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B4EB891A-1EFC-440D-B412-13758A5573D4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
