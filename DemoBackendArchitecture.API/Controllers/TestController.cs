@@ -11,7 +11,7 @@ public class TestController(IConfiguration configuration) : BaseController
     public IActionResult Test()
     {
         // Print all the configuration values
-        var result = "";
+        var result = "Api is working\n";
         foreach (var item in _configuration.AsEnumerable())
         {
             result += item.Key + " : " + item.Value + "\n";
