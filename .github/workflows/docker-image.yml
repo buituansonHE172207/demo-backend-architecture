@@ -21,7 +21,8 @@ jobs:
       id-token: write
     env:
       REGISTRY: docker.io
-      IMAGE_NAME: test-azure
+      IMAGE_NAME: tuansondocker1407/test-azure
+
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
